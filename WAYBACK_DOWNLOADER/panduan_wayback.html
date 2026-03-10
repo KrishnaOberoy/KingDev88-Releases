@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panduan KingDev88 Wayback Downloader Pro</title>
+    <title>Dokumentasi KingDev88 Wayback Downloader Pro</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -55,35 +55,20 @@
             margin-top: 10px;
         }
 
-        .step-card {
+        .section-card {
             background: var(--card-bg);
             border-radius: 15px;
             padding: 30px;
             margin-bottom: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: transform 0.3s ease;
-            position: relative;
-            overflow: hidden;
             border-left: 5px solid var(--primary);
-        }
-
-        .step-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .step-number {
-            font-size: 4rem;
-            font-weight: 800;
-            color: rgba(197, 160, 89, 0.1);
-            position: absolute;
-            top: -10px;
-            right: 10px;
         }
 
         h2 {
             color: var(--primary);
             margin-bottom: 20px;
             font-size: 1.5rem;
+            text-transform: uppercase;
         }
 
         p { margin-bottom: 15px; }
@@ -92,31 +77,23 @@
         li {
             padding-left: 25px;
             position: relative;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         li::before {
-            content: '✓';
+            content: '•';
             color: var(--primary);
             position: absolute;
             left: 0;
             font-weight: bold;
+            font-size: 1.2rem;
         }
 
-        .warning {
-            background: rgba(255, 68, 68, 0.1);
-            border: 1px solid #ff4444;
+        .important {
+            background: rgba(197, 160, 89, 0.1);
+            border: 1px solid var(--primary);
             padding: 15px;
             border-radius: 8px;
-            color: #ff8888;
-            margin-top: 20px;
-        }
-
-        .pro-tip {
-            background: rgba(52, 152, 219, 0.1);
-            border: 1px solid var(--accent);
-            padding: 15px;
-            border-radius: 8px;
-            color: #85c1e9;
+            color: var(--primary);
             margin-top: 20px;
         }
 
@@ -126,72 +103,58 @@
             font-size: 0.8rem;
             color: #555;
         }
+
+        .highlight {
+            color: var(--primary);
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <h1>KingDev88 Wayback Downloader</h1>
-            <div class="badge">VERSI PROFESIONAL v1.0.4</div>
-            <p style="margin-top: 15px;">Strategi Restorasi Aged Domain & Implementasi Struktur Cloaking SEO</p>
+            <div class="badge">VERSI PROFESIONAL v1.0.5</div>
+            <p style="margin-top: 15px;">Dokumentasi Resmi Fungsi, Mekanisme, dan Prosedur Penggunaan</p>
         </header>
 
-        <!-- STEP 1 -->
-        <div class="step-card">
-            <span class="step-number">01</span>
-            <h2>Tahap Analisis Struktur Domain</h2>
-            <p>Identifikasi data historis yang memiliki otoritas tinggi (Golden Era).</p>
+        <!-- FUNGSI -->
+        <div class="section-card">
+            <h2>Fungsi Utama</h2>
+            <p>KingDev88 Wayback Downloader Pro dirancang sebagai instrumen restorasi data historis digital dengan efisiensi tinggi. Fungsi utamanya meliputi:</p>
             <ul>
-                <li>Masukkan domain target (contoh: <b>architecturenewsplus.com</b>) pada kolom Domain.</li>
-                <li>Klik tombol <b>🔍 Analisis Struktur Domain</b>.</li>
-                <li>Jendela pop-up akan menampilkan rincian <b>Golden Era</b> (Tahun Keemasan saat domain beroperasi normal).</li>
-                <li>Gunakan data <b>Path Finder</b> untuk mengidentifikasi direktori yang terkonfirmasi aman.</li>
+                <li><span class="highlight">Ekstraksi Data Historis:</span> Menarik kembali aset HTML, CSS, dan citra visual dari server arsip global sesuai dengan rentang waktu spesifik.</li>
+                <li><span class="highlight">Analisis Struktur Otoritas:</span> Mengidentifikasi periode aktif terbaik (Golden Era) dari sebuah domain berdasarkan kepadatan arsip historis.</li>
+                <li><span class="highlight">Pemindaian Direktori:</span> Melakukan audit terhadap sub-direktori domain untuk membedakan antara jalur akses yang bersih dan jalur akses yang memiliki riwayat aktivitas spam di masa lalu.</li>
             </ul>
         </div>
 
-        <!-- STEP 2 -->
-        <div class="step-card">
-            <span class="step-number">02</span>
-            <h2>Proses Restorasi Konten</h2>
-            <p>Melakukan pengunduhan aset digital secara sistematis.</p>
+        <!-- CARA KERJA -->
+        <div class="section-card">
+            <h2>Mekanisme (Cara Kerja)</h2>
+            <p>Sistem beroperasi melalui integrasi protokol API dan algoritma pemrosesan data internal:</p>
             <ul>
-                <li>Klik tombol <b>"Terapkan Parameter Timestamp"</b> pada jendela analisis.</li>
-                <li>Parameter Timestamp akan terisi secara otomatis pada formulir utama.</li>
-                <li>Pilih tombol <b>MULAI PROSES RESTORASI</b>.</li>
-                <li>Software akan mengunduh seluruh file HTML, CSS, dan Gambar ke dalam direktori lokal Anda.</li>
+                <li><span class="highlight">Sinkronisasi CDX API:</span> Aplikasi berkomunikasi langsung dengan server database Wayback Machine untuk mengambil indeks URL secara massal tanpa memerlukan peramban manual.</li>
+                <li><span class="highlight">Algoritma Golden Era:</span> Mesin pemroses menghitung distribusi frekuensi arsip per tahun untuk memberikan estimasi akurat mengenai periode operasional paling stabil dari domain target.</li>
+                <li><span class="highlight">Path Finder Intelligent Scan:</span> Melakukan filter otomatis terhadap jutaan URL untuk memetakan struktur direktori domain dan mengklasifikasikan risiko keamanan berdasarkan kata kunci historis.</li>
             </ul>
         </div>
 
-        <!-- STEP 3 -->
-        <div class="step-card">
-            <span class="step-number">03</span>
-            <h2>Implementasi pada Server Hosting</h2>
-            <p>Memulihkan otoritas domain pada mesin pencari Google.</p>
+        <!-- CARA PENGGUNAAN -->
+        <div class="section-card">
+            <h2>Prosedur Penggunaan</h2>
+            <p>Ikuti langkah-langkah berikut untuk mengoperasikan perangkat lunak secara optimal:</p>
             <ul>
-                <li>Unggah seluruh berkas hasil restorasi ke direktori <code>public_html</code> domain Anda.</li>
-                <li>Pastikan website tampil sesuai dengan versi historisnya.</li>
-                <li>Lakukan pemantauan indeks selama 3-7 hari hingga otoritas domain (Authority) pulih sempurna.</li>
+                <li><span class="highlight">Inisialisasi:</span> Masukkan nama domain target pada kolom yang tersedia dan pastikan Lisensi KingDev88 Anda telah terverifikasi.</li>
+                <li><span class="highlight">Tahap Analisis:</span> Klik tombol <b>🔍 Analisis Struktur Domain</b> untuk memulai pemindaian database. Gunakan hasil laporan untuk menentukan Timestamp terbaik.</li>
+                <li><span class="highlight">Konfigurasi Parameter:</span> Terapkan parameter Timestamp yang direkomendasikan sistem atau masukkan secara manual untuk menargetkan tanggal tertentu.</li>
+                <li><span class="highlight">Eksekusi Restorasi:</span> Klik tombol <b>MULAI PROSES RESTORASI</b>. Aplikasi akan membangun struktur folder lokal dan mengunduh seluruh aset secara otomatis.</li>
+                <li><span class="highlight">Verifikasi Hasil:</span> Seluruh berkas akan tersimpan dalam direktori aplikasi. Anda dapat memeriksa integritas berkas segera setelah status progres mencapai 100%.</li>
             </ul>
         </div>
 
-        <!-- STEP 4 -->
-        <div class="step-card">
-            <span class="step-number">04</span>
-            <h2>Konfigurasi Cloaking Strategis</h2>
-            <p>Tahap monetisasi dengan skenario pengalihan trafik terkendali.</p>
-            <ul>
-                <li>Pilih sub-direktori yang memiliki kategori "Aman" pada laporan Path Finder.</li>
-                <li>Buat direktori tersebut di peladen hosting Anda (Contoh: <code>/portal/</code> atau <code>/archived/</code>).</li>
-                <li>Gunakan <b>KingDev88 Cloak Generator</b> untuk memproduksi berkas <code>index.php</code>.</li>
-                <li>Konfigurasikan berkas <code>.htaccess</code> agar Google Bot tetap melakukan perayapan pada konten historis.</li>
-            </ul>
-            <div class="pro-tip">
-                <b>INFORMASI:</b> Gunakan direktori yang belum pernah teridentifikasi berisiko oleh algoritma Path Finder untuk efektivitas maksimal.
-            </div>
-        </div>
-
-        <div class="warning">
-            <b>PEMBERITAHUAN:</b> Pastikan Lisensi KingDev88 Anda dalam status aktif untuk mendapatkan pembaruan bot perayap secara berkala.
+        <div class="important">
+            <b>PEMBERITAHUAN:</b> Pastikan koneksi internet stabil selama proses restorasi berlangsung untuk menghindari fragmentasi data saat pengunduhan berkas massal.
         </div>
 
         <footer>
