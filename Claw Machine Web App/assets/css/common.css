@@ -1,0 +1,106 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+*,
+*:after,
+*:before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: var(--bs-gray-700) var(--bs-white);
+}
+*::-webkit-scrollbar {width: 12px}
+*::-webkit-scrollbar-track {background: var(--bs-white)}
+*::-webkit-scrollbar-thumb {background-color: var(--bs-gray-900);border: 3px solid var(--bs-white)}
+
+.selector-for-some-widget {box-sizing: content-box}
+
+body, html {
+    position: relative;
+    width: 100%;
+    margin: auto;
+    font-family: 'Quicksand', sans-serif !important;
+    font-size: 14px !important;
+    color: var(--bs-gray-900)
+}
+
+a {
+    color: var(--bs-primary) !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+    transition: .3s
+}
+
+a:hover {
+    color: var(--bs-danger) !important;
+    text-decoration: none !important
+}
+
+.full {
+    width: 100%;
+    margin: auto
+}
+
+.text-indigo {
+    color: var(--bs-indigo)
+}
+
+.text-indigo-subtle {
+    color: #3D0A91
+}
+
+.border-indigo { border-color: var(--bs-indigo) }
+
+.bg-indigo { background: var(--bs-indigo) !important }
+
+.btn-indigo {
+    background-color: var(--bs-indigo) !important;
+    border-color: var(--bs-indigo) !important;
+    color: #fff !important
+}
+
+.btn-indigo:hover,
+.btn-indigo:active,
+.btn-indigo:focus {
+    background-color: #520dc2 !important;
+    border-color: #520dc2 !important;
+    color: #fff !important
+}
+
+.dt-layout-full {
+    padding: 0px !important
+}
+
+.dt-layout-start {
+    padding-left: 0px !important
+}
+
+.dt-layout-end {
+    padding-right: 0px !important
+}
+
+.dt-container .row {
+    align-items: center !important;
+}
+
+.row {
+    width: 100% !important;
+    margin: auto !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.row > div[class*='col-'] {
+    margin-bottom: 20px !important;
+}
+
+.row > div[class*='col-']:last-child {
+    margin-bottom: 0px !important;
+}
+
+@media screen and (max-width: 720px) {
+
+    .row > div[class*='col-'] {
+        height: 100% !important
+    }
+}

@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Meta Basic -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- SEO Meta Tags -->
+    <meta name="title" content="Claw Game Demo">
+    <meta name="description" content="Raih dan Menangkan hadiah menarik yang terdapat di mesin capit ini!  asdfasdf">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="Claw Game Demo">
+    <meta property="og:description" content="Raih dan Menangkan hadiah menarik yang terdapat di mesin capit ini!  asdfasdf">
+    <meta property="og:image" content="./assets/images/crane/background.jpeg">
+    <meta property="og:url" content="http://127.0.0.1:8000">
+    <meta property="og:type" content="website">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Claw Game Demo">
+    <meta name="twitter:description" content="Raih dan Menangkan hadiah menarik yang terdapat di mesin capit ini!">
+    <meta name="twitter:image" content="./assets/images/crane/background.jpeg">
+
+    <title>Claw Game Demo</title>
+    <link rel="shortcut icon" href="./assets/images/favicon.webp">
+
+    <!-- Internal CSS -->
+    <link rel="stylesheet" href="./assets/css/common.css?v=142999753">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Remixicon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <!-- Sweetalert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- JS Cookie -->
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js" integrity="sha256-WCzAhd2P6gRJF9Hv3oOOd+hFJi/QJbv+Azn4CGB8gfY=" crossorigin="anonymous"></script>
+
+    <script>
+        const baseUrl = (path = false) => {
+            return `http://127.0.0.1:8000/api/v1/game/${path ? path : ''}`
+        }
+        const csrfToken = ``
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Chewy&display=swap');
+        @import url('https://fonts.googleapis.com/css?family=Carter+One');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+
+        body {
+            background: url("./assets/images/crane/background.jpeg");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+
+        #crane-canvas {
+            width: 300px;
+            height: 300px;
+        }
+
+        #crane {
+            width: 30%;
+            margin: auto;
+            padding: 10px
+        }
+
+        #crane-header {
+            background: #3b7cbb;
+            border: 1px solid #5498d9
+        }
+
+        #crane-header .crane-title {
+            font-family: "Chewy", system-ui !important
+        }
+
+        #crane-header .crane-token {
+            font-family: "Orbitron", sans-serif;
+        }
+
+        #crane-control {
+            background: #848484;
+            border: 1px solid #a0a0a0;
+            /* height: 100px */
+        }
+
+        #crane-guide .crane-list {
+            font-size: 9px !important
+        }
+
+        .crane-button {
+            position: relative;
+            top: 0;
+            cursor: pointer;
+            text-decoration: none !important;
+            outline: none !important;
+            font-family: "Chewy", system-ui !important;
+            /* font-size: 20px; */
+            /* line-height: 1em; */
+            letter-spacing: .1em;
+            text-shadow: 2px 2px 1px #0066a2, -2px 2px 1px #0066a2, 2px -2px 1px #0066a2, -2px -2px 1px #0066a2, 0px 2px 1px #0066a2, 0px -2px 1px #0066a2, 0px 4px 1px #004a87, 2px 4px 1px #004a87, -2px 4px 1px #004a87;
+            border: none;
+            /* margin: 15px 15px 30px; */
+            background: repeating-linear-gradient( 45deg, #3ebbf7, #3ebbf7 5px, #45b1f4 5px, #45b1f4 10px);
+            border-bottom: 3px solid rgba(16, 91, 146, 0.5);
+            border-top: 3px solid rgba(255,255,255,.3);
+            color: #fff !important;
+            border-radius: 8px;
+            padding: 6px 13px 8px;
+            box-shadow: 0 6px 0 #266b91, 0 8px 1px 1px rgba(0,0,0,.3), 0 10px 0 5px #12517d, 0 12px 0 5px #1a6b9a, 0 15px 0 5px #0c405e, 0 15px 1px 6px rgba(0,0,0,.3);
+        }
+
+        .crane-button:hover {
+            top:2px;
+            box-shadow: 0 4px 0 #266b91, 0 6px 1px 1px rgba(0,0,0,.3), 0 8px 0 5px #12517d, 0 10px 0 5px #1a6b9a, 0 13px 0 5px #0c405e, 0 13px 1px 6px rgba(0,0,0,.3);
+        }
+
+        .crane-button::before {
+            content: '';
+            height: 10%;
+            position: absolute;
+            width: 40%;
+            background: #fff;
+            right: 13%;
+            top: -3%;
+            border-radius: 99px;
+        }
+
+        .crane-button::after {
+            content: '';
+            height: 10%;
+            position: absolute;
+            width: 5%;
+            background: #fff;
+            right: 5%;
+            top: -3%;
+            border-radius: 99px;
+        }
+
+        .crane-button.orange {
+            background: repeating-linear-gradient( 45deg, #ffc800, #ffc800 5px, #ffc200 5px, #ffc200 10px);
+            box-shadow: 0 6px 0 #b76113, 0 8px 1px 1px rgba(0,0,0,.3), 0 10px 0 5px #75421f, 0 12px 0 5px #8a542b, 0 15px 0 5px #593116, 0 15px 1px 6px rgba(0,0,0,.3);
+            border-bottom: 3px solid rgba(205, 102, 0, 0.5);
+            text-shadow: 2px 2px 1px #e78700, -2px 2px 1px #e78700, 2px -2px 1px #e78700, -2px -2px 1px #e78700, 0px 2px 1px #e78700, 0px -2px 1px #e78700, 0px 4px 1px #c96100, 2px 4px 1px #c96100, -2px 4px 1px #c96100;
+        }
+
+        .crane-button.orange:hover {
+            top:2px;
+            box-shadow: 0 4px 0 #b76113, 0 6px 1px 1px rgba(0,0,0,.3), 0 8px 0 5px #75421f, 0 10px 0 5px #8a542b, 0 13px 0 5px #593116, 0 13px 1px 6px rgba(0,0,0,.3);
+        }
+
+        .crane-button.red {
+            background: repeating-linear-gradient( 45deg, #ff4f4c, #ff4f4c 5px, #ff4643 5px, #ff4643 10px);
+            box-shadow: 0 6px 0 #ae2725, 0 8px 1px 1px rgba(0,0,0,.3), 0 10px 0 5px #831614, 0 12px 0 5px #a33634, 0 15px 0 5px #631716, 0 15px 1px 6px rgba(0,0,0,.3);
+            border-bottom: 3px solid rgba(160, 25, 23, 0.5);
+            text-shadow: 2px 2px 1px #d72d21, -2px 2px 1px #d72d21, 2px -2px 1px #d72d21, -2px -2px 1px #d72d21, 0px 2px 1px #d72d21, 0px -2px 1px #d72d21, 0px 4px 1px #930704, 2px 4px 1px #930704, -2px 4px 1px #930704;
+        }
+
+        .crane-button.red:hover {
+            top:2px;
+            box-shadow: 0 4px 0 #ae2725, 0 6px 1px 1px rgba(0,0,0,.3), 0 8px 0 5px #831614, 0 10px 0 5px #a33634, 0 13px 0 5px #631716, 0 13px 1px 6px rgba(0,0,0,.3);
+        }
+
+        .crane-button.green {
+            background: repeating-linear-gradient( 45deg, #54d440, #54d440 5px, #52cc3f 5px, #52cc3f 10px);
+            box-shadow: 0 6px 0 #348628, 0 8px 1px 1px rgba(0,0,0,.3), 0 10px 0 5px #2a6d20, 0 12px 0 5px #39822e, 0 15px 0 5px #1d4c16, 0 15px 1px 6px rgba(0,0,0,.3);
+            border-bottom: 3px solid rgba(40, 117, 29, 0.5);
+            text-shadow: 2px 2px 1px #348628, -2px 2px 1px #348628, 2px -2px 1px #348628, -2px -2px 1px #348628, 0px 2px 1px #348628, 0px -2px 1px #348628, 0px 4px 1px #1d4c16, 2px 4px 1px #1d4c16, -2px 4px 1px #1d4c16;
+        }
+
+        .crane-button.green:hover {
+            top:2px;
+            box-shadow: 0 4px 0 #348628, 0 6px 1px 1px rgba(0,0,0,.3), 0 8px 0 5px #2a6d20, 0 10px 0 5px #39822e, 0 13px 0 5px #1d4c16, 0 13px 1px 6px rgba(0,0,0,.3);
+        }
+
+        .falling-item {
+            position: absolute;
+            opacity: 1;
+            animation: fall 5s infinite linear;
+        }
+
+        #ungame2 {
+            z-index: 999;
+            position: fixed; /* Optional, based on your layout */
+            width: 100%; /* Adjust size as needed */
+            height: 100%; /* Adjust size as needed */
+            background: rgba(0255, 0255, 0255, 0.2); /* Semi-transparent white */
+            border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle border */
+            backdrop-filter: blur(10px); /* Apply the glass blur effect */
+            box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1); /* Subtle shadow for depth */
+            -webkit-backdrop-filter: blur(10px); /* For Safari */
+        }
+
+        #ungame {
+            z-index: 999;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5)
+        }
+
+        #preload {
+            z-index: 9999;
+            position: fixed; /* Optional, based on your layout */
+            width: 100%; /* Adjust size as needed */
+            height: 100%; /* Adjust size as needed */
+            background: #fff
+        }
+
+        .crane-list {
+            display: flex;
+            gap: 0.5rem; /* Jarak antar elemen */
+        }
+
+        .crane-item {
+            flex: 1 1 200px; /* Memastikan lebar fleksibel, tapi tetap seragam */
+            display: flex;
+            flex-direction: column;
+            aspect-ratio: 1; /* Rasio panjang dan lebar sama */
+            max-width: 250px; /* Kontrol ukuran maksimum */
+            text-align: center;
+            background-color: #f8f9fa; /* Warna latar belakang */
+        }
+
+        .crane-item img.crane-img {
+            width: 20px; /* Ukuran gambar seragam */
+            margin-top: 5px;
+        }
+
+        .reward-item {
+            width: 10%;
+            min-width: 100px;
+            box-sizing: border-box;
+        }
+
+        .reward-item .regular-reward {
+            background: #d9dfeb;
+            border: 1px solid #c2c8d3;
+        }
+
+        .reward-item .main-reward {
+            background: #ffe79b;
+            border: 1px solid #e3cf8f;
+        }
+
+        .reward-item .reward-body {
+            height: 140px
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        /* Extra Small Devices */
+        @media (max-width: 575px) {
+            #crane {
+                width: 100%
+            }
+
+            #crane-canvas {
+                width: 100%
+            }
+        }
+
+        /* Small Devices */
+        @media (min-width: 576px) and (max-width: 767px) {
+            #crane {
+                width: 75%
+            }
+
+            #crane-canvas {
+                width: 100%
+            }
+        }
+
+        /* Medium Devices */
+        @media (min-width: 768px) and (max-width: 991px) {
+            #crane {
+                width: 50%
+            }
+
+            #crane-canvas {
+                width: 100%
+            }
+        }
+
+        /* Large Devices */
+        @media (min-width: 992px) and (max-width: 1199px) {
+            #crane {
+                width: 40%
+            }
+
+            #crane-canvas {
+                width: 100%
+            }
+        }
+
+        /* Extra Large Devices */
+        @media (min-width: 1200px) {
+            #crane {
+                width: 30%
+            }
+
+            #crane-canvas {
+                width: 100%
+            }
+        }
+
+        /* Ultra Large Devices */
+        @media (min-width: 1600px) {
+            #crane {
+                width: 30%
+            }
+
+            #crane-canvas {
+                width: 100%
+            }
+        }
+        
+        #particles-js {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100vh; /* Ensure it covers the entire viewport */
+          overflow: hidden; /* Prevent overflow */
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div id="particles-js"></div>
+    <!-- Modal -->
+    <div class="modal fade rounded-0" id="listRewards" tabindex="-1" aria-labelledby="listRewardsLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content rounded-0">
+                <div class="modal-body rounded-0 p-0">
+                    <div class="my-3 text-center fw-bold fs-4">Daftar Hadiah Claw Machine</div>
+                    <div class="d-flex justify-content-center align-items-stretch flex-wrap mb-3">
+                        
+                        
+                                                    <div class="reward-item position-relative">
+                                <i class="ri-bookmark-fill text-danger position-absolute fs-3" style="left: 10px"></i>
+                                <i class="ri-vip-crown-fill text-warning position-absolute" style="left: 16.5px; top: 6px; font-size: 12px"></i>
+                                <div class="m-2 p-2 text-center rounded main-reward pt-3 reward-body">
+                                    <center>
+                                        <img src="/static/mesin-capit/storage/assets/images/rewards/bsq0oKHaPx1oouAO0m6sZaqV16ngCIUkgCB4LN7s.webp" style="height: 60px" class="border border-dark d-block mb-2">
+                                    </center>
+                                    <small class="fw-bold" title="IPhone 16 Pro Max">IPhone 16 Pro Max</small>
+                                </div>
+                            </div>
+                                                    <div class="reward-item position-relative">
+                                <i class="ri-bookmark-fill text-danger position-absolute fs-3" style="left: 10px"></i>
+                                <i class="ri-vip-crown-fill text-warning position-absolute" style="left: 16.5px; top: 6px; font-size: 12px"></i>
+                                <div class="m-2 p-2 text-center rounded main-reward pt-3 reward-body">
+                                    <center>
+                                        <img src="/static/mesin-capit/storage/assets/images/rewards/tWkhskYAms6a08EcMahTGSJ31WXL54QBhnYXkrZF.jpg" style="height: 60px" class="border border-dark d-block mb-2">
+                                    </center>
+                                    <small class="fw-bold" title="Yamaha NMAX 2023">Yamaha NMAX 2023</small>
+                                </div>
+                            </div>
+                                                    <div class="reward-item position-relative">
+                                <i class="ri-bookmark-fill text-danger position-absolute fs-3" style="left: 10px"></i>
+                                <i class="ri-vip-crown-fill text-warning position-absolute" style="left: 16.5px; top: 6px; font-size: 12px"></i>
+                                <div class="m-2 p-2 text-center rounded main-reward pt-3 reward-body">
+                                    <center>
+                                        <img src="/static/mesin-capit/storage/assets/images/rewards/arWzdecZ1eI3H7i2IAauLUzBDFYv1b1XbSn2HrE4.jpg" style="height: 60px" class="border border-dark d-block mb-2">
+                                    </center>
+                                    <small class="fw-bold" title="Macbook Air M4">Macbook Air M4</small>
+                                </div>
+                            </div>
+                        
+                        
+                                                    <div class="reward-item position-relative">
+                                <div class="m-2 p-2 text-center rounded regular-reward pt-3 reward-body">
+                                    <center>
+                                        <img src="/static/mesin-capit/storage/assets/images/rewards/lYWt5vNFI1bVLs0BXobCZNaYhTW4Izx0TCHXa3sZ.jpg" style="height: 60px" class="border border-dark d-block mb-2">
+                                    </center>
+                                    <small class="fw-bold" title="Rp. 15.000">Rp. 15.000</small>
+                                </div>
+                            </div>
+                                                    <div class="reward-item position-relative">
+                                <div class="m-2 p-2 text-center rounded regular-reward pt-3 reward-body">
+                                    <center>
+                                        <img src="/static/mesin-capit/storage/assets/images/rewards/DBZwxdMfkWJYkgSLAihCrYN2BeLX91Z7H9a3oE25.jpg" style="height: 60px" class="border border-dark d-block mb-2">
+                                    </center>
+                                    <small class="fw-bold" title="Rp. 20.000">Rp. 20.000</small>
+                                </div>
+                            </div>
+                                                    <div class="reward-item position-relative">
+                                <div class="m-2 p-2 text-center rounded regular-reward pt-3 reward-body">
+                                    <center>
+                                        <img src="/static/mesin-capit/storage/assets/images/rewards/p6Y5JrHW2cSIKggHE86koPujjM0YFNsJqUwIhf8O.jpg" style="height: 60px" class="border border-dark d-block mb-2">
+                                    </center>
+                                    <small class="fw-bold" title="Rp. 50.000">Rp. 50.000</small>
+                                </div>
+                            </div>
+                                                    <div class="reward-item position-relative">
+                                <div class="m-2 p-2 text-center rounded regular-reward pt-3 reward-body">
+                                    <center>
+                                        <img src="/static/mesin-capit/storage/assets/images/rewards/6ry0o8zt9pk0wPDyX6HBpWfYULfhwtD9d6jWAdKa.jpg" style="height: 60px" class="border border-dark d-block mb-2">
+                                    </center>
+                                    <small class="fw-bold" title="Rp. 100.000">Rp. 100.000</small>
+                                </div>
+                            </div>
+                                                    <div class="reward-item position-relative">
+                                <div class="m-2 p-2 text-center rounded regular-reward pt-3 reward-body">
+                                    <center>
+                                        <img src="/static/mesin-capit/storage/assets/images/rewards/zlraVIbOMrWVHiSFRW0jjO2UkJbnrB4YVhDnBbKq.jpg" style="height: 60px" class="border border-dark d-block mb-2">
+                                    </center>
+                                    <small class="fw-bold" title="Rp. 250.000">Rp. 250.000</small>
+                                </div>
+                            </div>
+                                                    <div class="reward-item position-relative">
+                                <div class="m-2 p-2 text-center rounded regular-reward pt-3 reward-body">
+                                    <center>
+                                        <img src="/static/mesin-capit/storage/assets/images/rewards/8bzXgozusXee7OHup9dym3yVASlqAwWTouXlVHTG.jpg" style="height: 60px" class="border border-dark d-block mb-2">
+                                    </center>
+                                    <small class="fw-bold" title="Rp. 500.000">Rp. 500.000</small>
+                                </div>
+                            </div>
+                                            </div>
+                    <button type="button" class="btn btn-danger w-100 rounded-0 btn-lg" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="ungame" class="d-flex align-items-center justify-content-center">
+        <div class="text-center">
+            <div class="mb-3">
+                <center>
+                    <img src="https://placehold.co/600x200" style="min-height: 50px;max-height: 90px">
+                </center>
+            </div>
+            <div class="fs-1 fw-bold text-white mb-3">Capit Dan Menangkan Hadiahnya</div>
+            <div class="mb-3">
+                <span class="d-block text-white mb-3">Masukan Kode Voucher</span>
+                <input type="text" class="form-control form-control-lg text-center rounded-0" name="voucher_code" id="voucher_code">
+            </div>
+            <button class="btn btn-info mb-3 d-block fw-bold w-100 btn-lg rounded-0" type="button" id="btn_redeem" onclick="Main.redeemVoucher()">Mulai</button>
+            <button class="btn btn-warning d-block fw-bold w-100 btn-lg rounded-0" type="button" data-bs-toggle="modal" data-bs-target="#listRewards">Daftar Hadiah</button>
+        </div>
+    </div>
+
+    <div class="position-relative vh-100 overflow-hidden" id="crane-container">
+        <div class="position-absolute top-50 start-50 translate-middle w-100 m-auto vh-100 overflow-auto">
+
+            <div id="crane" class="position-absolute top-50 start-50 translate-middle">
+                <div id="crane-header" class="p-3 rounded d-flex align-items-center justify-content-between shadow">
+                    
+                    <img src="./assets/images/crane/machine_title.png" style="height: 40px">
+                    <span class="crane-token btn badge bg-danger-subtle text-dark rounded-pill" id="tokenPlay">0 Token</span>
+                </div>
+                <div class="m-auto px-3 pb-2 pt-3 bg-white border mx-2">
+                    <center>
+                        <canvas id="crane-canvas" class="border bg-white"></canvas>
+                    </center>
+                </div>
+                
+                <div id="crane-control" class="p-3 rounded d-flex align-items-center justify-content-between shadow">
+                    
+                    <div>
+                        <button type="button" style="border: none;background: none" id="moveLeft" class="p-0 m-0 buttonControlNav"><img src="./assets/images/crane/left.png" style="width: 60px"></button>
+                        <button type="button" style="border: none;background: none" id="moveRight" class="p-0 m-0 buttonControlNav"><img src="./assets/images/crane/right.png" style="width: 60px"></button>
+                        <button type="button" style="border: none;background: none" id="moveUp" class="p-0 m-0 buttonControlNav"><img src="./assets/images/crane/up.png" style="width: 60px"></button>
+                        <button type="button" style="border: none;background: none" id="moveDown" class="p-0 m-0 buttonControlNav"><img src="./assets/images/crane/down.png" style="width: 60px"></button>
+                    </div>
+                    <div>
+                        <button type="button" id="startButton" style="border: none;background: none" class="p-0 m-0"><img src="./assets/images/crane/start.png" style="height: 60px"></button>
+                        <button type="button" id="grab" style="border: none;background: none;display: none;" class="p-0 m-0"><img src="./assets/images/crane/grab.png" style="height: 60px"></button>
+                    </div>
+                </div>
+                <div id="crane-guide" class="p-3 pt-2 bg-white rounded-bottom border mx-2">
+                    <div class="fw-bold fs-5">Cara Bermain</div>
+                    <small class="mb-2 text-secondary d-block">Semua orang adalah pemenang dimesin ini!</small>
+                    <div class="d-flex align-items-stretch crane-list gap-3">
+                        <div class="crane-item bg-light p-1 rounded text-dark text-center">
+                            <span class="d-block fw-bold">01</span>
+                            Bermain dengan menekan<br />
+                            <center>
+                                <img src="./assets/images/crane/start.png" alt="Start" class="crane-img">
+                            </center>
+                        </div>
+                        <div class="crane-item bg-light p-1 rounded text-dark text-center">
+                            <span class="d-block fw-bold">02</span>
+                            Arahkan capit sesuai keinginan
+                        </div>
+                        <div class="crane-item bg-light p-1 rounded text-dark text-center">
+                            <span class="d-block fw-bold">03</span>
+                            Tangkap boneka dengan menekan<br />
+                            <center>
+                                <img src="./assets/images/crane/grab.png" alt="Grab" class="crane-img">
+                            </center>
+                        </div>
+                        <div class="crane-item bg-light p-1 rounded text-dark text-center">
+                            <span class="d-block fw-bold">04</span>
+                            Screenshot dan kirimkan ke Admin untuk mendapatkan hadiah
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- Internal JS -->
+    <script>
+        var vc;
+        var remaning_left;
+
+        setInterval(() => {
+            const images = {
+                falling: null
+            };
+        
+            let fallingItem;
+        
+            if (images.falling && images.falling !== 'null') {
+                // If falling image exists, create an image element
+                fallingItem = $(`<span class="falling-item"><img src="${images.falling}" style="height: 30px"></span>`);
+            } else {
+                // Fallback if `falling` image doesn't exist
+                fallingItem = $('<span class="falling-item fs-4">🐻</span>');
+            }
+        
+            const randomX = Math.random() * $(window).width();
+            fallingItem.css('left', randomX);
+            $('#crane-container').append(fallingItem);
+        
+            fallingItem.animate({
+                top: $(window).height()
+            }, 5000, function() {
+                fallingItem.remove();
+            });
+        }, 500);
+
+        const tokenPlay = $('#tokenPlay')
+        const CraneElement = {
+            selector: "#crane-canvas",
+            glass: "./assets/images/crane/glass.png",
+            clawImage: "./storage/assets/images/crane/etOvjUMyz6Xt2crOR2DLSoFdDZxYU0c4a9FdAlqX.png",
+            itemsImage: "./assets/images/crane/item.png",
+            serverSide: (callback, clawStatus) => {
+                const title = "Reward"
+                const code = Cookies.get("voucher_code")
+                vc = (vc ? vc : code)
+
+                Common.ajaxReq(baseUrl(`play`), "POST", {
+                    data: JSON.stringify({ code: code }),
+                    contentType: "application/json",
+                    dataType: "JSON"
+                }).then((res) => {
+                    clawStatus(res.reward_type)
+                    let tokenLeft = res.remaining_tokens
+                    remaning_left = res.remaining_tokens
+                    tokenPlay.text(`${tokenLeft} Token`)
+
+                    let text = "Klaim"
+                    let clr = "var(--bs-success)"
+                    if (res.status) {
+                        if (res.reward_type === "zonk") {
+                            text = "Tutup"
+                            clr = "var(--bs-danger)"
+                        }
+                    } else {
+                        text = "Tutup"
+                        clr = "var(--bs-danger)"
+                    }
+
+                    setTimeout(() => {
+                        Common.alert(res.status ? false : "error", null, res.message, {
+                            confirmButtonText: text,
+                            confirmButtonColor: clr,
+                            allowOutsideClick: false,
+                            allowEscapeKey: false
+                        }).then((result) => {
+                            if (result.isConfirmed && res.status) {
+                                if(res.reward_type !== "zonk") {
+                                    console.log(vc)
+                                    // claimReward(code, "/", res.reward_id) // Simplifying claim for now
+                                }
+
+                                if(tokenLeft === 0) {
+                                    location.reload()
+                                    Cookies.remove("voucher_code")
+                                }
+                            }
+                        })
+                        callback.resetCrane(true)
+                    }, 1500)
+                }).catch(err => {
+                    tokenPlay.text("0 Token")
+                    Common.alert("error", title, "Gagal memuat hadiah", {
+                        confirmButtonText: "Close",
+                        confirmButtonColor: "var(--bs-danger)",
+                        allowOutsideClick: false,
+                        allowEscapeKey: false
+                    })
+                    callback.resetCrane(true)
+                })
+            }
+        }
+
+        function claimReward(code, redirect, reward_id) {
+            Common.ajaxReq(baseUrl(`api/play/claim/${code ?? vc}/${reward_id}`), "GET", {
+                dataType: "JSON"
+            }).then(res => {
+                vc = false
+                if(!res.status) {
+                    Common.alert("error", "Klaim Hadiah", "Error", {
+                        confirmButtonText: "Close",
+                        confirmButtonColor: "var(--bs-danger)",
+                        allowOutsideClick: false,
+                        allowEscapeKey: false
+                    })
+                    return
+                }
+
+                // Cookies.remove("voucher_code")
+                // window.location.replace(redirect)
+                // window.history.pushState({ page: 'newPage' }, 'new page', redirect);
+                window.location.replace(redirect);
+            })
+        }
+    </script>
+    <script src="/static/mesin-capit/assets/js/common.js?v=2837235573"></script>
+    <script src="/static/mesin-capit/assets/js/main.js?v=3844262477"></script>
+    <script src="./assets/js/common.js?v=2837235573"></script>
+    <script src="./assets/js/main.js?v=3844262477"></script>
+    <script src="./assets/js/crane.js?v=656176013"></script>
+    <script src="./assets/js/particle.js?v=5664307148"></script>
+    <script>
+        $(window).on("load", () => {
+            $(".buttonControlNav").prop("disabled", true)
+        })
+
+        $("#startButton").on("click", () => {
+            $("#startButton").find("img").attr("src", "./assets/images/crane/start_hold.png")
+            setTimeout(() => {
+                $("#startButton").find("img").attr("src", "./assets/images/crane/start.png")
+            }, 150)
+
+            Common.alert("info", false, `Anda memiliki <b>${remaning_left}</b> Token<br />Untuk <b>${remaning_left}</b> kali kesempatan bermain`, {
+                confirmButtonText: "Close",
+                confirmButtonColor: "var(--bs-info)",
+                allowOutsideClick: false,
+                allowEscapeKey: false
+            })
+            setTimeout(() => {
+                $("#startButton").hide();
+                $("#grab").show();
+                $(".buttonControlNav").prop("disabled", false)
+            }, 300)
+        })
+
+        $("#grab").on("click", () => {
+            $("#grab").find("img").attr("src", "./assets/images/crane/grab_hold.png")
+            setTimeout(() => {
+                $("#grab").find("img").attr("src", "./assets/images/crane/grab.png")
+            }, 150);
+        })
+    </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"0c376e7b76c1427c94401ba054fb5a9b","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
